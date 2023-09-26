@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navgraph"
+    app:startDestination="@id/playersListFragment">
+
+    <fragment
+        android:id="@+id/playersListFragment"
+        android:name="com.utn.nflplayersapp.fragments.PlayersListFragment"
+        android:label="fragment_players_list"
+        tools:layout="@layout/fragment_players_list" >
+        <action
+            android:id="@+id/action_playersListFragment_to_playerDetailsFragment"
+            app:destination="@id/playerDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/playerDetailsFragment"
+        android:name="com.utn.nflplayersapp.fragments.PlayerDetailsFragment"
+        android:label="fragment_player_details"
+        tools:layout="@layout/fragment_player_details" >
+        <argument
+            android:name="player"
+            app:argType="com.utn.nflplayersapp.models.Player" />
+    </fragment>
+</navigation>
