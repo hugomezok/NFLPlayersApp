@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayoutAdd"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.AddPlayerFragment">
+
+    <EditText
+        android:id="@+id/editPhotoPlayer"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:hint="URL Photo"
+        android:inputType="text"
+        android:textSize="16dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/editNamePlayer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+
+    <EditText
+        android:id="@+id/editNamePlayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Name Player"
+        android:inputType="text"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/editTeamPlayer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editPhotoPlayer" />
+
+    <EditText
+        android:id="@+id/editTeamPlayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Team"
+        android:inputType="text"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/editNumberPlayer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editNamePlayer" />
+
+    <EditText
+        android:id="@+id/editNumberPlayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Number"
+        android:inputType="number"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@id/btnAdd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTeamPlayer" />
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editNumberPlayer" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,11 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.utn.nflplayersapp.R
 import com.utn.nflplayersapp.adapters.PlayersAdapter
+import com.utn.nflplayersapp.database.AppDatabase
+import com.utn.nflplayersapp.database.PlayerDao
 import com.utn.nflplayersapp.models.Player
 
 class PlayersListFragment : Fragment() {
@@ -20,22 +23,14 @@ class PlayersListFragment : Fragment() {
         fun newInstance() = PlayersListFragment()
     }
 
-    private var playersList : MutableList<Player> = mutableListOf()
-
-    var flag = 0
-
     private lateinit var v: View
     private lateinit var rvPlayers: RecyclerView
-    private lateinit var viewModel: PlayersListViewModel
+    private lateinit var btnAdd : Button
 
+    private var playersList : MutableList<Player> = mutableListOf()
 
-    playersList.add(Player("Josh Allen", "Buffalo Bills", "17", "https://www.pro-football-reference.com/req/20230307/images/headshots/AlleJo02_2023.jpg"))
-    playersList.add(Player("Travis Kelce", "Kansas City Chiefs", "87", "https://www.pro-football-reference.com/req/20230307/images/headshots/KelcTr00_2023.jpg"))
-    playersList.add(Player("Justin Jefferson", "Minnesota Vikings", "18", "https://www.pro-football-reference.com/req/20230307/images/headshots/JeffJu00_2022.jpg"))
-    playersList.add(Player("T.J. Watt", "Pittsburgh Steelers", "90", "https://www.pro-football-reference.com/req/20230307/images/headshots/WattT.00_2018.jpg"))
-    playersList.add(Player("Micah Hyde", "Buffalo Bills", "23", "https://www.pro-football-reference.com/req/20230307/images/headshots/HydeMi00_2023.jpg"))
-
-
+    private var db: AppDatabase? = null
+    private var playerDao: PlayerDao? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,47 +40,42 @@ class PlayersListFragment : Fragment() {
         return v
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
- //       if(flag==0){
-  //          playersList.add(Player("Josh Allen", "Buffalo Bills", "17", "https://www.pro-football-reference.com/req/20230307/images/headshots/AlleJo02_2023.jpg"))
-   //         playersList.add(Player("Travis Kelce", "Kansas City Chiefs", "87", "https://www.pro-football-reference.com/req/20230307/images/headshots/KelcTr00_2023.jpg"))
-     //       playersList.add(Player("Justin Jefferson", "Minnesota Vikings", "18", "https://www.pro-football-reference.com/req/20230307/images/headshots/JeffJu00_2022.jpg"))
-       //     playersList.add(Player("T.J. Watt", "Pittsburgh Steelers", "90", "https://www.pro-football-reference.com/req/20230307/images/headshots/WattT.00_2018.jpg"))
-         //   playersList.add(Player("Micah Hyde", "Buffalo Bills", "23", "https://www.pro-football-reference.com/req/20230307/images/headshots/HydeMi00_2023.jpg"))
-           // flag = 1
-
-   //     }
-
+    override fun onStart() {
+        super.onStart()
 
         rvPlayers = v.findViewById(R.id.rvPlayers)
+        btnAdd = v.findViewById(R.id.btnAdd)
+
+        db = AppDatabase.getInstance(v.context)
+        playerDao = db?.playerDao()
+        playersList = playerDao?.fetchAllPlayers() as MutableList<Player>
 
         setupRecyclerView()
 
+        btnAdd.setOnClickListener {
+            val actionAdd = PlayersListFragmentDirections.actionPlayersListFragmentToAddPlayerFragment()
+            findNavController().navigate(actionAdd)
+        }
+
     }
 
-    private fun setupRecyclerView(){
-        val playersAdapter = PlayersAdapter(playersList) { player ->
-            Log.d("PlayersListFragment", "Player: ${player.name}")
 
-            val action = PlayersListFragmentDirections.actionPlayersListFragmentToPlayerDetailsFragment(player)
+    private fun setupRecyclerView(){
+
+        var playersAdapter = PlayersAdapter(playersList) { position ->
+            //Log.d("PlayersListFragment", "Player: ${player.name}")
+
+            val action = PlayersListFragmentDirections.actionPlayersListFragmentToPlayerDetailsFragment(playersList[position].id)
             findNavController().navigate(action)
 
         }
-
-        val adapter2 = PlayersAdapter(playersList, ::onPlayerClicked)
-
+        // var playersAdapter = PlayersAdapter(playersList)
+        //val adapter2 = PlayersAdapter(playersList, ::onPlayerClicked)
         with(rvPlayers){
             adapter = playersAdapter
             layoutManager = LinearLayoutManager(context)
         }
 
-        //rvPlayers.adapter = adapter
-        //rvPlayers.layoutManager = LinearLayoutManager(context)
     }
 
-    private fun onPlayerClicked(player: Player){
-        Log.d("PlayersListFragment", "Player: ${player.name}")
-    }
 }

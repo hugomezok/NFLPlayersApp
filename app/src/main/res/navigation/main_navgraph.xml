@@ -13,14 +13,47 @@
         <action
             android:id="@+id/action_playersListFragment_to_playerDetailsFragment"
             app:destination="@id/playerDetailsFragment" />
+        <action
+            android:id="@+id/action_playersListFragment_to_addPlayerFragment"
+            app:destination="@id/addPlayerFragment" />
     </fragment>
     <fragment
         android:id="@+id/playerDetailsFragment"
         android:name="com.utn.nflplayersapp.fragments.PlayerDetailsFragment"
         android:label="fragment_player_details"
         tools:layout="@layout/fragment_player_details" >
+        <action
+            android:id="@+id/action_playerDetailsFragment_to_editPlayerFragment"
+            app:destination="@id/editPlayerFragment" />
         <argument
-            android:name="player"
-            app:argType="com.utn.nflplayersapp.models.Player" />
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.utn.nflplayersapp.fragments.UserFragment"
+        android:label="fragment_user"
+        tools:layout="@layout/fragment_user" >
+        <action
+            android:id="@+id/action_userFragment_to_settingsActivity"
+            app:destination="@id/settingsActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/settingsActivity"
+        android:name="com.utn.nflplayersapp.activities.SettingsActivity"
+        android:label="SettingsActivity" />
+    <fragment
+        android:id="@+id/addPlayerFragment"
+        android:name="com.utn.nflplayersapp.fragments.AddPlayerFragment"
+        android:label="fragment_add_player"
+        tools:layout="@layout/fragment_add_player" />
+    <fragment
+        android:id="@+id/editPlayerFragment"
+        android:name="com.utn.nflplayersapp.fragments.EditPlayerFragment"
+        android:label="fragment_edit_player"
+        tools:layout="@layout/fragment_edit_player" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
     </fragment>
 </navigation>

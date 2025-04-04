@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Reply Preference -->
+    <string-array name="reply_entries">
+        <item>Uno</item>
+        <item>Dos</item>
+    </string-array>
+
+    <string-array name="reply_values">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+</resources>

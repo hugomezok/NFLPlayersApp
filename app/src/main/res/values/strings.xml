@@ -1,3 +1,22 @@
 <resources>
-    <string name="app_name">NFLPlayersApp</string>
+    <string name="app_name">NFL Players App</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="sync_header">Preferences</string>
+
+    <!-- Messages Preferences -->
+
+    <!-- Sync Preferences -->
+    <string name="attachment_title">Change Theme</string>
+    <string name="attachment_summary_on">Dark Theme</string>
+    <string name="attachment_summary_off">Default Theme</string>
+
+    <!-- Pop Up Fragment -->
+    <string name="popup_message">Are you sure you want to log out?</string>
+
+
+
+
+
 </resources>
